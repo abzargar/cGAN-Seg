@@ -1,0 +1,9 @@
+opencv-python~=4.8.1.78
+numpy~=1.26.2
+torch~=2.1.2
+torchvision~=0.16.1
+tqdm~=4.66.1
+scipy~=1.11.4
+Pillow~=10.1.0
+scikit-image~=0.22.0
+einops~=0.7.0
