@@ -1,9 +1,9 @@
 # cGAN-Seg
 
-This repository hosts the training and evaluation code for "cGAN-Seg: A Generative Adversarial Network for Enhanced Cell Segmentation with Limited Training Datasets." Our approach utilizes a modified CycleGAN architecture to train cell segmentation models effectively with a limited number of annotated cell images, addressing the challenge of scarce annotated data in microscopy imaging. This method not only diversifies training data but also improves the synthetic sample authenticity, thereby enhancing the segmentation model's accuracy and robustness. ![Screenshot](Figure1.jpg)
+This repository hosts the training and evaluation code for "cGAN-Seg: A Generative Adversarial Network for Enhanced Cell Segmentation with Limited Training Datasets." Our approach utilizes a modified CycleGAN architecture to train cell segmentation models effectively with a limited number of annotated cell images, addressing the challenge of scarce annotated data in microscopy imaging. This method not only diversifies training data but also improves the synthetic sample authenticity, thereby enhancing the segmentation model's accuracy and robustness. ![Screenshot](Figure1.png)
 
 ### Datasets
-We employed several segmentation datasets in our experiments, including DeepSea, CellPose, LiveCell, and Cell Tracking Challenge images alongside their corresponding masks. Access the datasets here: [cGAN-Seg datasets](https://drive.google.com/drive/folders/1M5UDPfjSrdWdCieGubpDiM31pHMclhaD?usp=sharing)
+We employed several segmentation datasets in our experiments, including DeepSea, CellPose, LiveCell, and Cell Tracking Challenge images alongside their corresponding masks. Access the datasets here: [cGAN-Seg datasets](https://drive.google.com/drive/folders/1ZYkNA4mm6xaAjm51vfg1YL2kgDfp4OPD?usp=sharing)
 
 ### Requirements
 
