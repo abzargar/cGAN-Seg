@@ -1,4 +1,5 @@
 # Import necessary libraries and packages
+import os
 import argparse
 from data import BasicDataset,get_image_mask_pairs
 import cv2
@@ -101,16 +102,18 @@ def test(args, image_size=[512, 768], image_means=[0.5], image_stds=[0.5], batch
             real_A_list.append(real_mask)
             fake_img_list.append(fake_img)
 
-    # Saving the real and generated images
-    save_images(args.output_dir, real_img_list, fake_img_list, real_A_list)
+    if os.path.exists(os.path.join(args.test_set_dir, 'images')):
+        # Saving the real and generated images
+        save_images(args.output_dir, real_img_list, fake_img_list, real_A_list)
 
-    # Reshape and repeat images for FID calculation
-    real_images = reshape_and_repeat(real_img_list, image_size, is_gray=True)
-    generated_images = reshape_and_repeat(fake_img_list, image_size, is_gray=True)
+        # Reshape and repeat images for FID calculation
+        real_images = reshape_and_repeat(real_img_list, image_size, is_gray=True)
+        generated_images = reshape_and_repeat(fake_img_list, image_size, is_gray=True)
 
-    # Calculate and print FID score
-    fid_score = calculate_fid(real_images, generated_images, device)
-    print('FID Score: %f' % fid_score)
+        # Calculate and print FID score
+        fid_score = calculate_fid(real_images, generated_images, device)
+        print('FID Score: %f' % fid_score)
+
 
 if __name__ == "__main__":
     # Argument parsing

@@ -6,22 +6,26 @@ import numpy as np
 def get_image_mask_pairs(base_folder):
     images_folder = os.path.join(base_folder, 'images')
     masks_folder = os.path.join(base_folder, 'masks')
-    assert os.path.exists(images_folder), f'No images folder found in {base_folder}'
+    if not os.path.exists(images_folder):
+        print(f'Note: No images folder found in {base_folder} we use only mask images if it works')
     assert os.path.exists(masks_folder), f'No masks folder found in {base_folder}'
 
     pairs = []
-    for image_name in sorted(os.listdir(images_folder)):
-        image_base_name, _ = os.path.splitext(image_name)
+    for mask_name in sorted(os.listdir(masks_folder)):
+        mask_base_name, _ = os.path.splitext(mask_name)
+        # Find the corresponding image
+        if os.path.exists(images_folder):
+            for image_name in sorted(os.listdir(images_folder)):
+                image_base_name, _ = os.path.splitext(image_name)
 
-        # Find the corresponding mask
-        for mask_name in sorted(os.listdir(masks_folder)):
-            mask_base_name, _ = os.path.splitext(mask_name)
-
-            if image_base_name == mask_base_name:
-                image_path = os.path.join(images_folder, image_name)
-                mask_path = os.path.join(masks_folder, mask_name)
-                pairs.append((image_path, mask_path))
-                break
+                if image_base_name == mask_base_name:
+                    image_path = os.path.join(images_folder, image_name)
+                    mask_path = os.path.join(masks_folder, mask_name)
+                    pairs.append((image_path, mask_path))
+                    break
+        else:
+            mask_path = os.path.join(masks_folder, mask_name)
+            pairs.append((mask_path, mask_path))#both are masks
 
     return pairs
 

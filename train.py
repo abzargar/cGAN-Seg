@@ -74,7 +74,6 @@ def train(args,image_size = [512,768],image_means = [0.5],image_stds= [0.5],trai
     # Read samples
     sample_pairs=get_image_mask_pairs(args.train_set_dir)
     assert len(sample_pairs)>0, f'No samples found in {args.train_set_dir}'
-
     # Split samples
     train_sample_pairs=sample_pairs[:int(train_ratio*len(sample_pairs))]
     valid_sample_pairs=sample_pairs[int(train_ratio * len(sample_pairs)):]
@@ -190,8 +189,8 @@ def train(args,image_size = [512,768],image_means = [0.5],image_stds= [0.5],trai
                 d_mask_loss = d_criterion(D2(fake_mask_p), valid)
                 rec_mask_loss=100 * Seg_criterion(rec_mask, torch.squeeze(real_mask.to(dtype=torch.long), dim=1))
                 id_mask_loss = 50 * Seg_criterion(fake_mask, torch.squeeze(real_mask.to(dtype=torch.long), dim=1))
-                rec_img_loss=100 * Gen_criterion_1(rec_img, real_img)+100 * Gen_criterion_2(rec_img, real_img)
-                id_img_loss = 50 * Gen_criterion_1(fake_img, real_img)+50 * Gen_criterion_2(fake_img, real_img)
+                rec_img_loss=50 * Gen_criterion_1(rec_img, real_img)+100 * Gen_criterion_2(rec_img, real_img)
+                id_img_loss = 25 * Gen_criterion_1(fake_img, real_img)+50 * Gen_criterion_2(fake_img, real_img)
                 g_loss=d_mask_loss+d_img_loss+rec_mask_loss+rec_img_loss+id_mask_loss+id_img_loss
 
                 grad_scaler.scale(g_loss).backward()  # Scale the loss, and then backward pass

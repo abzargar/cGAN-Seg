@@ -44,7 +44,7 @@ python generate_high_density_masks.py --real_mask_set_dir .../cGAN-Seg_datasets/
 
 Then:
 
-python test_generator_model.py --test_set_dir /synthetic_high_density_dataset/ --gen_ckpt_dir .../cGAN-Seg_checkpoints/deepsea_model/mouse_embryonic_stem_cells/Gen.pth --output_dir /synthetic_high_density_dataset/
+python test_generation_model.py --test_set_dir /synthetic_high_density_dataset/ --gen_ckpt_dir .../cGAN-Seg_checkpoints/deepsea_model/mouse_embryonic_stem_cells/Gen.pth --output_dir /synthetic_high_density_dataset/
 
 ```
 
