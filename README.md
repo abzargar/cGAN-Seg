@@ -40,7 +40,7 @@ Generate synthetic high-density and colony-like cell images using the trained St
 Teh script generate_high_density.py creates synthetic, high-density, and colony-like mask images. These generated masks are then used by the trained StyleUNET generator to produce corresponding synthetic cell images, enhancing the model's ability to tackle complex segmentation scenarios.  
 ```
 Example:
-python generate_high_density.py.py --real_mask_set_dir .../cGAN-Seg_datasets/DeepSea_datasets/mouse_embryonic_stem_cell_dataset/test/masks/ --synthetic_mask_set_dir /synthetic_high_density_dataset/
+python generate_high_density_masks.py --real_mask_set_dir .../cGAN-Seg_datasets/DeepSea_datasets/mouse_embryonic_stem_cell_dataset/test/masks/ --synthetic_mask_set_dir /synthetic_high_density_dataset/
 
 Then:
 

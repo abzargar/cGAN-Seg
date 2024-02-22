@@ -76,7 +76,7 @@ if __name__ == "__main__":
     # Argument parsing
     ap = argparse.ArgumentParser()
     ap.add_argument("--real_mask_set_dir", required=True, type=str, help="path for the real mask image set as the input")
-    ap.add_argument("-synthetic_mask_set_dir", required=True, type=str, help="path for saving the generated mask images")
+    ap.add_argument("--synthetic_mask_set_dir", required=True, type=str, help="path for saving the generated mask images")
 
     args = ap.parse_args()
 
