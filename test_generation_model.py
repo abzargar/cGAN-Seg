@@ -72,7 +72,7 @@ def test(args, image_size=[512, 768], image_means=[0.5], image_stds=[0.5], batch
     test_iterator = data.DataLoader(test_data, batch_size=batch_size, shuffle=False)
 
     # Load the models
-    Gen = nn.DataParallel(StyleUnetGenerator(style_latent_dim = 128,output_nc=1)).to(device)
+    Gen = StyleUnetGenerator(style_latent_dim = 128,output_nc=1).to(device)
     Gen.load_state_dict(torch.load(args.gen_ckpt_dir))
 
     # Set the models to evaluation mode
