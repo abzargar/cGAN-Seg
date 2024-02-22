@@ -83,11 +83,11 @@ if __name__ == "__main__":
     # Check if test dataset directory exists
     assert os.path.isdir(args.real_mask_set_dir), 'No such file or directory: ' + args.real_mask_set_dir
 
-    if os.path.exists(args.synthetic_mask_set_dir):
+    if os.path.exists(os.path.join(args.synthetic_mask_set_dir,'masks')):
         # Remove the existing directory and all its contents
-        shutil.rmtree(args.synthetic_mask_set_dir)
+        shutil.rmtree(os.path.join(args.synthetic_mask_set_dir,'masks'))
 
     # Create the new directory
-    os.makedirs(args.synthetic_mask_set_dir)
+    os.makedirs(os.path.join(args.synthetic_mask_set_dir,'masks'))
 
-    generate_synthetic_masks(args.real_mask_set_dir, args.synthetic_mask_set_dir)
+    generate_synthetic_masks(args.real_mask_set_dir, os.path.join(args.synthetic_mask_set_dir,'masks'))
