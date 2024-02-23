@@ -252,7 +252,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--train_set_dir",required=True,type=str,help="path for the train dataset")
     ap.add_argument("--lr", default=1e-4,type=float, help="learning rate")
-    ap.add_argument("--max_epoch", default=2000, type=int, help="maximum epoch to train model")
+    ap.add_argument("--max_epoch", default=2500, type=int, help="maximum epoch to train model")
     ap.add_argument("--batch_size", default=2, type=int, help="train batch size")
     ap.add_argument("--output_dir", required=True, type=str, help="path for saving the train log and best checkpoint")
     ap.add_argument("--p_vanilla", default=0.2,type=float, help="probability value of vanilla augmentation")
