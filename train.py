@@ -131,7 +131,7 @@ def train(args,image_size = [512,768],image_means = [0.5],image_stds= [0.5],trai
 
     # Training loop
     nstop=0
-    avg_precision_best=0
+    avg_fscore_best=0
     logging.info('>>>> Start training')
     print('INFO: Start training ...')
     for epoch in range(args.max_epoch):
@@ -224,13 +224,13 @@ def train(args,image_size = [512,768],image_means = [0.5],image_stds= [0.5],trai
 
         # Evaluate the model and save the best checkpoint
         scores = evaluate_segmentation(Seg, valid_iterator, device,Seg_criterion,len(valid_data),is_avg_prec=True,prec_thresholds=[0.5],output_dir=None)
-        if avg_precision is not None:
+        if scores['avg_fscore'] is not None:
             logging.info('>>>> Epoch:%d  , Dice score=%f , avg fscore=%f' % (epoch,scores['dice_score'], scores['avg_fscore']))
         else:
             logging.info('>>>> Epoch:%d  , Dice score=%f' % (epoch,scores['dice_score']))
 
-        if avg_precision is not None and avg_precision>avg_precision_best:
-            avg_precision_best=avg_precision
+        if scores['avg_fscore'] is not None and scores['avg_fscore']>avg_fscore_best:
+            avg_fscore_best=scores['avg_fscore']
             if save_checkpoint:
                 torch.save(Gen.state_dict(), os.path.join(args.output_dir, 'Gen.pth'))
                 torch.save(Seg.state_dict(), os.path.join(args.output_dir, 'Seg.pth'))
@@ -238,7 +238,7 @@ def train(args,image_size = [512,768],image_means = [0.5],image_stds= [0.5],trai
                 torch.save(D2.state_dict(), os.path.join(args.output_dir, 'D2.pth'))
                 logging.info('>>>> Save the model checkpoints to %s'%(os.path.join(args.output_dir)))
             nstop=0
-        elif avg_precision is not None and avg_precision<=avg_precision_best:
+        elif scores['avg_fscore'] is not None and scores['avg_fscore']<=avg_fscore_best:
             nstop+=1
         if nstop==args.patience:#Early Stopping
             print('INFO: Early Stopping met ...')
