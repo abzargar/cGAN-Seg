@@ -223,11 +223,11 @@ def train(args,image_size = [512,768],image_means = [0.5],image_stds= [0.5],trai
         )
 
         # Evaluate the model and save the best checkpoint
-        val_score,avg_precision,avg_val_loss = evaluate_segmentation(Seg, valid_iterator, device,Seg_criterion,len(valid_data),is_avg_prec=True,prec_thresholds=[0.5],output_dir=None)
+        scores = evaluate_segmentation(Seg, valid_iterator, device,Seg_criterion,len(valid_data),is_avg_prec=True,prec_thresholds=[0.5],output_dir=None)
         if avg_precision is not None:
-            logging.info('>>>> Epoch:%d  , Dice score=%f , avg precision=%f' % (epoch,val_score, avg_precision[0]))
+            logging.info('>>>> Epoch:%d  , Dice score=%f , avg fscore=%f' % (epoch,scores['dice_score'], scores['avg_fscore']))
         else:
-            logging.info('>>>> Epoch:%d  , Dice score=%f' % (epoch,val_score))
+            logging.info('>>>> Epoch:%d  , Dice score=%f' % (epoch,scores['dice_score']))
 
         if avg_precision is not None and avg_precision>avg_precision_best:
             avg_precision_best=avg_precision
