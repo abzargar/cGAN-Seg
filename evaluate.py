@@ -75,6 +75,9 @@ def evaluate_segmentation(net, valid_iterator, device,criterion,n_valid_examples
 
     scores = {
         'dice_score': dice_score.cpu().numpy() / num_val_batches,
+        'avg_precision': None,
+        'avg_recall': None,
+        'avg_fscore': None,
         'avg_val_loss': avg_val_loss
     }
     return scores
